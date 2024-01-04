@@ -4,19 +4,42 @@ import Link from "next/link";
 import styles from "./navbar.module.css";
 
 export default function NavBar() {
+  const isLoggedIn = false;
+  const user = "Leo";
+
   return (
     <nav className={styles.main}>
       <div className={styles.heroLogo}>
         <Image src="/main-logo.svg" alt="RateMyRSOs" width={200} height={70} />
       </div>
       <div className={styles.navLinks}>
-        <Link className={styles.login} href="/login">
-          Login
-        </Link>
-        <Link className={styles.signup} href="/signup">
-          Sign Up
-        </Link>
+        {isLoggedIn ? <UserNav user={user} /> : <GuestNav />}
       </div>
     </nav>
+  );
+}
+
+// FIXME: find a better solution for having multiple classNames
+function GuestNav() {
+  return (
+    <>
+      <Link className={`${styles["btn"]} ${styles["login-btn"]}`} href="/login">
+        Login
+      </Link>
+      <Link
+        className={`${styles["btn"]} ${styles["signup-btn"]}`}
+        href="/signup"
+      >
+        Sign Up
+      </Link>
+    </>
+  );
+}
+
+function UserNav({ user }: { user: String }) {
+  return (
+    <>
+      <div className={`${styles["btn"]} ${styles["user-btn"]}`}>Hi, {user}</div>
+    </>
   );
 }
