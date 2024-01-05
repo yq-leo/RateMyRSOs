@@ -1,3 +1,8 @@
+:root {
+  --uiuc-blue: #13294b;
+  --uiuc-orange: #ff5f05;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
