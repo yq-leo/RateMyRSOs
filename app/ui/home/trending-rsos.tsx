@@ -4,31 +4,31 @@ import RSOCard from "@/app/ui/home/rso-card";
 export default function TrendingRSOs() {
   const rsos = [
     {
-      id: 1,
+      id: "1",
       name: "Illini Esports",
       rating: 4.5,
       numReviews: 20,
     },
     {
-      id: 2,
+      id: "2",
       name: "Illini Esports",
       rating: 4.5,
       numReviews: 20,
     },
     {
-      id: 3,
+      id: "3",
       name: "Illini Esports",
       rating: 4.5,
       numReviews: 20,
     },
     {
-      id: 4,
+      id: "4",
       name: "Illini Esports",
       rating: 4.5,
       numReviews: 20,
     },
     {
-      id: 5,
+      id: "5",
       name: "Illini Esports",
       rating: 4.5,
       numReviews: 20,
