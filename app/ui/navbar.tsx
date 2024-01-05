@@ -23,13 +23,10 @@ export default function NavBar() {
 function GuestNav() {
   return (
     <>
-      <Link className={`${styles["btn"]} ${styles["login-btn"]}`} href="/login">
+      <Link className={`${styles.btn} ${styles.loginBtn}`} href="/login">
         Login
       </Link>
-      <Link
-        className={`${styles["btn"]} ${styles["signup-btn"]}`}
-        href="/signup"
-      >
+      <Link className={`${styles.btn} ${styles.signupBtn}`} href="/signup">
         Sign Up
       </Link>
     </>
@@ -39,7 +36,7 @@ function GuestNav() {
 function UserNav({ user }: { user: String }) {
   return (
     <>
-      <div className={`${styles["btn"]} ${styles["user-btn"]}`}>Hi, {user}</div>
+      <div className={`${styles.btn} ${styles.userBtn}`}>Hi, {user}</div>
     </>
   );
 }

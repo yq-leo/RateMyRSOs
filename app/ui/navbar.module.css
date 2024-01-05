@@ -26,23 +26,23 @@
   display: flex;
 }
 
-.login-btn {
+.loginBtn {
   background-color: #fff;
   color: #000;
 }
 
-.signup-btn,
-.user-btn {
+.signupBtn,
+.userBtn {
   background-color: #000;
   color: #fff;
 }
 
-.login-btn:hover {
+.loginBtn:hover {
   text-decoration: underline;
 }
 
-.signup-btn:hover,
-.user-btn:hover {
+.signupBtn:hover,
+.userBtn:hover {
   cursor: pointer;
   opacity: 0.8;
 }
