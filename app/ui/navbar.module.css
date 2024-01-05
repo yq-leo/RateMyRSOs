@@ -1,0 +1,48 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10rem;
+}
+
+.btn {
+  display: block;
+  text-decoration: none;
+  margin: 1rem 1rem;
+  padding: 1rem 2rem;
+  /* FIXME: find a better solution
+  why does it work: https://stackoverflow.com/questions/29966499/border-radius-in-percentage-and-pixels-px-or-em
+  */
+  border-radius: 999px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.heroLogo {
+  flex: 1;
+}
+
+.navLinks {
+  display: flex;
+}
+
+.loginBtn {
+  background-color: #fff;
+  color: #000;
+}
+
+.signupBtn,
+.userBtn {
+  background-color: #000;
+  color: #fff;
+}
+
+.loginBtn:hover {
+  text-decoration: underline;
+}
+
+.signupBtn:hover,
+.userBtn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
