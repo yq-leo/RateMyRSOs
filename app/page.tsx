@@ -8,8 +8,8 @@ export default function Home() {
     <main className={styles.main}>
       <h1 className={styles.title}>RateMyRSOs</h1>
       <p className={styles.description}>
-        Rate your favorite RSOs at{" "}
-        <span className={styles.uiucOrange}>UIUC</span>
+        Rate your favorite RSOs at
+        <span className={styles.uiucOrange}> UIUC</span>
       </p>
       <HeroSearchBar />
       <TrendingRSOs />
