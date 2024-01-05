@@ -5,7 +5,16 @@
   padding: 0 10rem;
 }
 
-.btn {
+.heroLogo {
+  flex: 1;
+}
+
+.navLinks {
+  display: flex;
+}
+
+.loginBtn,
+.signupBtn {
   display: block;
   text-decoration: none;
   margin: 1rem 1rem;
@@ -18,21 +27,12 @@
   font-weight: bold;
 }
 
-.heroLogo {
-  flex: 1;
-}
-
-.navLinks {
-  display: flex;
-}
-
 .loginBtn {
   background-color: #fff;
   color: #000;
 }
 
-.signupBtn,
-.userBtn {
+.signupBtn {
   background-color: #000;
   color: #fff;
 }
@@ -41,8 +41,7 @@
   text-decoration: underline;
 }
 
-.signupBtn:hover,
-.userBtn:hover {
+.signupBtn:hover {
   cursor: pointer;
   opacity: 0.8;
 }
