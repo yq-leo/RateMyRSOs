@@ -31,6 +31,8 @@
   align-items: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
+  overflow: hidden;
+  text-align: center;
 }
 
 .menuContent > * {
@@ -41,4 +43,11 @@
   font-size: 1.5rem;
   font-weight: bold;
   white-space: nowrap;
+  width: 100%;
+}
+
+.menuContent > *:hover {
+  background-color: var(--uiuc-blue);
+  color: #fff;
+  cursor: pointer;
 }
