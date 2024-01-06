@@ -6,7 +6,7 @@ import styles from "./navbar.module.css";
 import UserNav from "@/app/ui/user-nav";
 
 export default function NavBar({
-  isLoggedIn = true,
+  isLoggedIn = false,
 }: {
   isLoggedIn?: boolean;
 }) {
