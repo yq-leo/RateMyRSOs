@@ -20,6 +20,7 @@ export default function UserNav({ user }: { user: String }) {
           <Link href="/account/ratings">My Ratings</Link>
           <Link href="/account/my-rsos">My RSOs</Link>
           <Link href="/account/saved-rsos">Saved RSOs</Link>
+          <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
         </div>
       )}
     </div>
