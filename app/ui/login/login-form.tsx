@@ -1,46 +1,19 @@
-import Link from "next/link";
+import { getProviders } from "next-auth/react";
 import styles from "./login-form.module.css";
 
-export default function LoginForm() {
+import OAuthButtonList from "./oauth-button-list";
+import EmailForm from "./email-form";
+
+export default async function LoginForm() {
+  const providers = await getProviders();
+
   return (
-    <form className={styles.main}>
-      <div className={styles.formField}>
-        <label htmlFor="email" className={styles.label}>
-          Email
-        </label>
-        <input
-          className={styles.input}
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-        />
+    <div className={styles.main}>
+      <OAuthButtonList providers={providers} />
+      <div className={styles.divider}>
+        <span>Or login with email</span>
       </div>
-      <div className={styles.formField}>
-        <label htmlFor="password" className={styles.label}>
-          Password
-        </label>
-        <input
-          className={styles.input}
-          id="password"
-          type="password"
-          placeholder="Enter your password"
-        />
-      </div>
-      <p className={styles.resetPwd}>
-        Forget your password?{" "}
-        <Link href="/password_reset" className={styles.resetPwdLink}>
-          Reset here
-        </Link>
-      </p>
-      <button className={styles.signInBtn} type="submit">
-        Login
-      </button>
-      <p className={styles.signUp}>
-        New to RateMyRSOs?{" "}
-        <Link href="/signup" className={styles.signUpLink}>
-          Sign up here
-        </Link>
-      </p>
-    </form>
+      <EmailForm />
+    </div>
   );
 }
