@@ -15,6 +15,11 @@
 
 .oauthWrapper {
   position: relative;
+  transition: transform 0.15s ease-in-out;
+}
+
+.oauthWrapper:hover {
+  transform: scale(1.05);
 }
 
 .oauthIcon {
@@ -33,8 +38,4 @@
   font-size: 1.5rem;
   font-weight: 500;
   cursor: pointer;
-}
-
-.oauthWrapper:hover {
-  transform: scale(1.05);
 }
