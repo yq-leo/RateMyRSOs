@@ -27,6 +27,6 @@ export const options = {
     },
   },
   pages: {
-    signIn: "/login",
+    // signIn: "/login",
   },
 };

@@ -1,20 +1,32 @@
 "use client";
 
+import Image from "next/image";
 import { signIn } from "next-auth/react";
 import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
 } from "next";
 import { getProviders } from "next-auth/react";
+import styles from "./oauth-button-list.module.css";
 
-export default function OAuthForm({
+export default function OAuthButtonList({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <div>
+    <div className={styles.main}>
       {Object.values(providers ?? []).map((provider) => (
-        <div key={provider.name}>
-          <button onClick={() => signIn(provider.id)}>
+        <div key={provider.name} className={styles.oauthWrapper}>
+          <Image
+            className={styles.oauthIcon}
+            src={`/${provider.name}-icon.svg`}
+            alt={`${provider.name} logo`}
+            width={30}
+            height={30}
+          />
+          <button
+            className={styles.oauthBtn}
+            onClick={() => signIn(provider.id)}
+          >
             Sign in with {provider.name}
           </button>
         </div>
