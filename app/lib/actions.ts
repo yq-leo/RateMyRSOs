@@ -23,6 +23,8 @@ export async function getUser(email: string): Promise<User> {
 
 export async function createUser(user: User): Promise<User> {
   const { email, name, firstName, lastName, password } = user;
+  // TODO: Remove this when signup is available in production
+  if (process.env.NODE_ENV !== "development") return user;
   try {
     const user = await getUser(email);
     if (user) return user;
