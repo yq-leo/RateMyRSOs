@@ -4,6 +4,8 @@ import styles from "./signup-form.module.css";
 export default function SignUpForm() {
   return (
     <form className={styles.main}>
+      {/* TODO: Remove this banner after implementing the signup functionality */}
+      <p className={styles.notAvailable}>Sign up is currently unavailable</p>
       <div className={styles.formField}>
         <label htmlFor="username" className={styles.label}>
           Username
