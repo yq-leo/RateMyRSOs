@@ -1,22 +1,42 @@
 "use server";
 
-import { z } from "zod";
 import { sql } from "@vercel/postgres";
-// import { signIn } from "./auth";
-import { SignInFormData } from "./definitions";
+import type { User, UserSql } from "@/app/lib/definitions";
+import bcrypt from "bcrypt";
 
-// export async function authenticate(formData: SignInFormData) {
-//   try {
-//     await signIn("credentials", formData);
-//     console.log("Successfully signed in.");
-//     return null;
-//   } catch (error) {
-//     console.error("Failed to sign in:", error);
-//     switch ((error as any)?.type) {
-//       case "CredentialsSignin":
-//         return "Invalid credentials.";
-//       default:
-//         return "Something went wrong.";
-//     }
-//   }
-// }
+export async function getUser(email: string): Promise<User> {
+  try {
+    const user = (await sql<UserSql>`SELECT * FROM users WHERE email=${email}`)
+      .rows[0];
+    return (
+      user && {
+        ...user,
+        firstName: user?.first_name,
+        lastName: user?.last_name,
+      }
+    );
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    throw new Error("Failed to fetch user.");
+  }
+}
+
+export async function createUser(user: User): Promise<User> {
+  const { email, name, firstName, lastName, password } = user;
+  // TODO: Remove this when signup is available in production
+  if (process.env.NODE_ENV !== "development") return user;
+  try {
+    const user = await getUser(email);
+    if (user) return user;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await sql<UserSql>`
+      INSERT INTO users (name, first_name, last_name, email, password)
+      VALUES (${name}, ${firstName}, ${lastName}, ${email}, ${hashedPassword})
+    `;
+    console.log("User created");
+    return await getUser(email);
+  } catch (error) {
+    console.error("Failed to create user:", error);
+    throw new Error("Failed to create user.");
+  }
+}
