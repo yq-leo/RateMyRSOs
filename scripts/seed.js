@@ -8,11 +8,11 @@ async function seedUsers(client) {
 
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS users (
-        id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+        id uuid DEFAULT uuid_generate_v4() UNIQUE PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         first_name VARCHAR(255),
         last_name VARCHAR(255),
-        email VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL
       );
     `;
