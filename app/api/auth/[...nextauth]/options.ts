@@ -56,7 +56,14 @@ export const options = {
           if (!user) return null;
           const passwordMatch = await bcrypt.compare(password, user.password);
 
-          if (passwordMatch) return user;
+          if (passwordMatch)
+            return {
+              ...user,
+              firstName:
+                user?.first_name || user?.name?.split(" ")[0] || "User",
+              lastName:
+                user?.last_name || user?.name?.split(" ")[1] || "Unknown",
+            };
         }
         return null;
       },
