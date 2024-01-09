@@ -6,8 +6,8 @@ export type SignInFormData = {
 export type User = {
   id: string;
   name: string;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 };
