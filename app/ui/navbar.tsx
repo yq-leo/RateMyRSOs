@@ -1,15 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./navbar.module.css";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 
 import UserNav from "@/app/ui/user-nav";
 
-export default function NavBar({
-  isLoggedIn = false,
-}: {
-  isLoggedIn?: boolean;
-}) {
-  const user = "Leo";
+export default async function NavBar() {
+  const session = await getServerSession(options);
 
   return (
     <nav className={styles.main}>
@@ -24,7 +22,7 @@ export default function NavBar({
         </Link>
       </div>
       <div className={styles.navLinks}>
-        {isLoggedIn ? <UserNav user={user} /> : <GuestNav />}
+        {!!session ? <UserNav user={session?.user?.firstName} /> : <GuestNav />}
       </div>
     </nav>
   );
