@@ -18,7 +18,7 @@ export default function OAuthButtonList({
             <div key={provider.name} className={styles.oauthWrapper}>
               <Image
                 className={styles.oauthIcon}
-                src={`/${provider.name}-icon.svg`}
+                src={`/${provider.id}-icon.svg`}
                 alt={`${provider.name} logo`}
                 width={30}
                 height={30}
