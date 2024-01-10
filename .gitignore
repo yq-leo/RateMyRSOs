@@ -38,3 +38,6 @@ next-env.d.ts
 
 # seed data
 scripts/data.json
+
+# development notes
+notes.md

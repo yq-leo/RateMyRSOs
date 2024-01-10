@@ -1,8 +1,16 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import type { User, UserSql } from "@/app/lib/definitions";
+import type {
+  SignUpFormData,
+  SignUpFormError,
+  User,
+  UserSql,
+} from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
+import { z } from "zod";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function getUser(email: string): Promise<User> {
   try {
@@ -39,4 +47,59 @@ export async function createUser(user: User): Promise<User> {
     console.error("Failed to create user:", error);
     throw new Error("Failed to create user.");
   }
+}
+
+const SignupFromSchema = z
+  .object({
+    name: z
+      .string({
+        invalid_type_error: "Name must be a string",
+      })
+      .min(1, { message: "Name is required" }),
+    email: z
+      .string({
+        invalid_type_error: "Email must be a string",
+      })
+      .email({ message: "Must be a valid email address" }),
+    password: z
+      .string({
+        invalid_type_error: "Password is must be a string",
+      })
+      .min(6, { message: "Password must be at least 6 characters long" }),
+    confirmPassword: z
+      .string({
+        invalid_type_error: "Password is must be a string",
+      })
+      .min(6, {
+        message: "Confirm Password must be at least 6 characters long",
+      }),
+  })
+  .refine((schema) => schema.password === schema.confirmPassword, {
+    message: "Passwords do not match",
+  });
+
+export async function signUpUser(
+  formData: SignUpFormData
+): Promise<SignUpFormError> {
+  const validatedForm = SignupFromSchema.safeParse(formData);
+  if (!validatedForm.success) {
+    const zodError = validatedForm.error.flatten();
+    return { ...zodError.fieldErrors, custom: zodError.formErrors };
+  }
+  const { name, email, password } = validatedForm.data;
+  try {
+    await createUser({
+      id: "",
+      name,
+      firstName: name.split(" ")[0],
+      lastName: name.split(" ")[1],
+      email,
+      password,
+    });
+  } catch (error) {
+    console.error("Failed to create user:", error);
+  }
+
+  revalidatePath("/");
+  redirect("/");
 }
