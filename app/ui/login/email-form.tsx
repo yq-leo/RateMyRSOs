@@ -3,51 +3,37 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import Link from "next/link";
 import styles from "./email-form.module.css";
-import { signIn } from "next-auth/react";
-import { SignInFormData } from "@/app/lib/definitions";
+import { signInUser } from "@/app/lib/login";
+import { SignInFormData, SignInFormError } from "@/app/lib/definitions";
 
 export default function EmailForm() {
   const [formData, setFormData] = useState<SignInFormData>({
     email: "",
     password: "",
   });
-  const [error, setError] = useState<String>("");
+  const [error, setError] = useState<SignInFormError | null>(null);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const res = await signIn("credentials", {
-        ...formData,
-        redirect: false,
-        callbackUrl: "/",
-      });
-      console.log(res);
-      if (res?.error) {
-        switch (res.error) {
-          case "CredentialsSignin":
-            setError("Invalid email or password");
-            break;
-          default:
-            setError("An unknown error has occurred");
-        }
-      }
-      if (res?.ok) {
-        // FIXME: This is a hacky way to refresh the page
-        window.location.href = "/";
-      }
-    } catch (error) {
-      console.error("Sign in error", error);
-      setError("An unknown error has occurred");
-    }
+    const loginError = await signInUser(formData);
+    if (loginError) setError(loginError);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleFormFocus = () => {
+    setError(null);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form
+      className={styles.form}
+      onSubmit={handleFormSubmit}
+      onFocus={handleFormFocus}
+    >
       <div className={styles.formField}>
         <label htmlFor="email" className={styles.label}>
           Email
@@ -58,7 +44,7 @@ export default function EmailForm() {
           type="email"
           name="email"
           placeholder="Enter your email"
-          onChange={handleChange}
+          onChange={handleFieldChange}
         />
       </div>
       <div className={styles.formField}>
@@ -71,7 +57,7 @@ export default function EmailForm() {
           type="password"
           name="password"
           placeholder="Enter your password"
-          onChange={handleChange}
+          onChange={handleFieldChange}
         />
       </div>
       <p className={styles.resetPwd}>
@@ -89,7 +75,7 @@ export default function EmailForm() {
           Sign up here
         </Link>
       </p>
-      <p className={styles.loginError}>{error}</p>
+      <p className={styles.loginError}>{error?.error}</p>
     </form>
   );
 }
