@@ -3,6 +3,10 @@ export type SignInFormData = {
   password: string;
 };
 
+export type SignInFormError = {
+  error?: string;
+};
+
 export type SignUpFormData = {
   name: string;
   email: string;
