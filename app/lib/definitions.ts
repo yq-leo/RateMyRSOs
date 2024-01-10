@@ -3,6 +3,21 @@ export type SignInFormData = {
   password: string;
 };
 
+export type SignUpFormData = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+export type SignUpFormError = {
+  name?: string[];
+  email?: string[];
+  password?: string[];
+  confirmPassword?: string[];
+  custom?: string[];
+};
+
 export type UserSql = {
   id: string;
   name: string;
