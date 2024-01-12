@@ -5,6 +5,10 @@
   padding: 0 10rem;
 }
 
+.darkMain {
+  background-color: #000;
+}
+
 .heroLogo {
   flex: 1;
 }
@@ -32,9 +36,18 @@
   color: #000;
 }
 
+.loginBtnDark {
+  background-color: #000;
+  color: #fff;
+}
+
 .signupBtn {
   background-color: #000;
   color: #fff;
+}
+
+.signupBtnDark {
+  border: #fff 2px solid;
 }
 
 .loginBtn:hover {
@@ -63,6 +76,10 @@
   font-weight: bold;
   background-color: #000;
   color: #fff;
+}
+
+.darkUserBtn {
+  border: #fff 2px solid;
 }
 
 .userBtn:hover {
