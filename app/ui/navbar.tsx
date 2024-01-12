@@ -21,7 +21,6 @@ export default function NavBar({ isHome = false }: { isHome: boolean }) {
       </div>
       <div className={styles.navLinks}>
         <NavButtons isHome={isHome} />
-        test
       </div>
     </nav>
   );
