@@ -3,11 +3,9 @@ import AuthProvider from "@/app/ui/auth-provider";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <AuthProvider>
-        <NavBar isHome={true} />
-      </AuthProvider>
+    <AuthProvider>
+      <NavBar isHome={true} />
       {children}
-    </>
+    </AuthProvider>
   );
 }
