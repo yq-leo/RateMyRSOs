@@ -39,3 +39,11 @@ export type User = {
   email: string;
   password: string;
 };
+
+export type RSO = {
+  id: string;
+  name: string;
+  image: string;
+  rating: number;
+  numReviews: number;
+};

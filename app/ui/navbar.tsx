@@ -6,9 +6,9 @@ import styles from "./navbar.module.css";
 import { useSession } from "next-auth/react";
 import { useReducer } from "react";
 
-export default function NavBar() {
+export default function NavBar({ isHome = false }: { isHome: boolean }) {
   return (
-    <nav className={styles.main}>
+    <nav className={`${styles.main} ${isHome || styles.darkMain}`}>
       <div className={styles.heroLogo}>
         <Link href="/">
           <Image
@@ -20,31 +20,40 @@ export default function NavBar() {
         </Link>
       </div>
       <div className={styles.navLinks}>
-        <NavButtons />
+        <NavButtons isHome={isHome} />
       </div>
     </nav>
   );
 }
 
-function NavButtons() {
+function NavButtons({ isHome }: { isHome: boolean }) {
   const { data: session, status } = useSession();
   switch (status) {
     case "authenticated":
       // @ts-ignore
-      return <UserNav user={session?.user?.firstName} />;
+      return <UserNav user={session?.user?.firstName} isHome={isHome} />;
     case "unauthenticated":
-      return <GuestNav />;
+      return <GuestNav isHome={isHome} />;
     default:
       return null;
   }
 }
 
-function UserNav({ user }: { user: String | null | undefined }) {
+function UserNav({
+  user,
+  isHome,
+}: {
+  user: String | null | undefined;
+  isHome: boolean;
+}) {
   const [menuOpen, toggleMenuOpen] = useReducer((state) => !state, false);
 
   return (
     <div className={styles.menu}>
-      <div className={styles.userBtn} onClick={toggleMenuOpen}>
+      <div
+        className={`${styles.userBtn} ${isHome || styles.darkUserBtn}`}
+        onClick={toggleMenuOpen}
+      >
         Hi, {user}
       </div>
       {menuOpen && (
@@ -61,15 +70,23 @@ function UserNav({ user }: { user: String | null | undefined }) {
   );
 }
 
-function GuestNav() {
+function GuestNav({ isHome }: { isHome: boolean }) {
   return (
     <>
-      <Link className={styles.loginBtn} href="/login">
+      <Link
+        className={`${styles.loginBtn} ${isHome || styles.loginBtnDark}`}
+        href="/login"
+      >
         Login
       </Link>
-      <Link className={styles.signupBtn} href="/signup">
+      <Link
+        className={`${styles.signupBtn} ${isHome || styles.signupBtnDark}`}
+        href="/signup"
+      >
         Sign Up
       </Link>
     </>
   );
 }
+
+// TODO: Fix overflow scroll issue
