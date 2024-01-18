@@ -22,20 +22,6 @@ export type SignUpFormError = {
   custom?: string[];
 };
 
-export type UserSql = {
-  id: string;
-  name: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: string;
-};
-
-export type RSOSql = {
-  id: string;
-  name: string;
-};
-
 export type User = {
   id: string;
   name: string;
@@ -49,6 +35,6 @@ export type RSO = {
   id: string;
   name: string;
   image: string;
-  rating: number;
-  numReviews: number;
+  links: string;
+  ratings: string;
 };

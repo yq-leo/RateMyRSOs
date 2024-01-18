@@ -5,8 +5,8 @@ import type {
   SignUpFormData,
   SignUpFormError,
   User,
-  UserSql,
-} from "@/app/lib/definitions";
+} from "@/app/lib/types/util-types";
+import { UserSql } from "@/app/lib/types/db-types";
 import bcrypt from "bcrypt";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
