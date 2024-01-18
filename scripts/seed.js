@@ -51,7 +51,8 @@ async function seedRSOs(client) {
         emails VARCHAR(255),
         logo VARCHAR(255),
         links VARCHAR(255),
-        ratings VARCHAR(255)
+        ratings VARCHAR(255),
+        num_reviews INT DEFAULT 0
       );
     `;
     console.log("RSOs table created");

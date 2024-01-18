@@ -35,6 +35,7 @@ export type RSO = {
   id: string;
   name: string;
   image: string;
-  links: string;
-  ratings: string;
+  //   links: string;
+  rating: number;
+  numReviews: number;
 };
