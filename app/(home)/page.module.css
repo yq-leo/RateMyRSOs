@@ -22,17 +22,41 @@
 
 .searchBar {
   position: relative;
+  --bar-width: 60rem;
+  --bar-height: 6rem;
+  --bar-border-radius: calc(var(--bar-height) / 2);
 }
 
-.searchInput {
-  width: 60rem;
-  height: 6rem;
-  border-radius: 999px;
-  border: none;
+.searchBarContent {
+  position: relative;
+  width: var(--bar-width);
+  height: var(--bar-height);
+  border-radius: var(--bar-border-radius);
   box-shadow: #00000059 0 0 10px;
   margin: 5rem 1rem;
   padding: 0 6rem;
+}
+
+.searchInput {
+  position: absolute;
+  border: none;
+  width: calc(0.68 * var(--bar-width));
+  height: inherit;
   font-size: 2rem;
+  z-index: 1;
+}
+
+.searchResults {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: #00000059 0 0 10px;
+  border-radius: var(--bar-border-radius);
+  /* height: 100rem; */
 }
 
 .searchInput:focus {

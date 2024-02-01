@@ -21,11 +21,27 @@ function HeroSearchBar() {
   return (
     <div className={styles.searchBarWrapper}>
       <div className={styles.searchBar}>
-        <input
-          className={styles.searchInput}
-          type="text"
-          placeholder="Search for an RSO"
-        />
+        <div className={styles.searchBarContent}>
+          <input
+            className={styles.searchInput}
+            type="text"
+            placeholder="Search for an RSO"
+          />
+          <div className={styles.searchResults}>
+            <div className={styles.searchResult}>Alpha Phi Omega</div>
+            <div className={styles.searchResult}>Illini Esports</div>
+            <div className={styles.searchResult}>Illi</div>
+            <div className={styles.searchResult}>Illini Esports</div>
+            <div className={styles.searchResult}>Illi</div>
+            <div className={styles.searchResult}>Illini Esports</div>
+            <div className={styles.searchResult}>Illi</div>
+            <div className={styles.searchResult}>Illini Esports</div>
+            <div className={styles.searchResult}>Illi</div>
+            <div className={styles.searchResult}>Illini Esports</div>
+            <div className={styles.searchResult}>Illi</div>
+            <div className={styles.searchResult}>Illini Esports</div>
+          </div>
+        </div>
         <FcSearch className={styles.searchIcon} />
         <div className={styles.searchBtn}>Search</div>
       </div>
