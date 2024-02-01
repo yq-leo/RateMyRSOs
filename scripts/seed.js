@@ -1,5 +1,6 @@
 const { db } = require("@vercel/postgres");
-const { users, rsos } = require("./data.json");
+const users = require("./data/users.json");
+const rsos = require("./data/rsos.json");
 const bcrypt = require("bcrypt");
 
 async function seedUsers(client) {
@@ -47,11 +48,12 @@ async function seedRSOs(client) {
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS rsos (
         id uuid DEFAULT uuid_generate_v4() UNIQUE PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        emails VARCHAR(255),
-        logo VARCHAR(255),
-        links VARCHAR(255),
-        ratings VARCHAR(255),
+        name VARCHAR(1024) NOT NULL,
+        emails VARCHAR(1024) DEFAULT '[]',
+        phones VARCHAR(1024) DEFAULT '[]',
+        logo VARCHAR(1024),
+        links VARCHAR(1024) DEFAULT '{}',
+        ratings VARCHAR(100) DEFAULT '{1: 0, 2: 0, 3: 0, 4: 0, 5: 0}',
         num_reviews INT DEFAULT 0
       );
     `;
@@ -60,8 +62,12 @@ async function seedRSOs(client) {
     const insertedRSOs = await Promise.all(
       rsos.map(async (rso) => {
         return client.sql`
-          INSERT INTO rsos (id, name, emails, logo, links, ratings)
-          VALUES (${rso.id}, ${rso.name}, ${rso.emails}, ${rso.logo}, ${rso.links}, ${rso.ratings})
+          INSERT INTO rsos (name, emails, phones, logo, links, ratings)
+          VALUES (${rso.name}, ${JSON.stringify(rso.emails)}, ${JSON.stringify(
+          rso.phones
+        )}, ${rso.logo}, ${JSON.stringify(rso.links)}, ${JSON.stringify(
+          rso.ratings
+        )})
           ON CONFLICT (id) DO NOTHING
         `;
       })
@@ -81,8 +87,24 @@ async function seedRSOs(client) {
 async function main() {
   const client = await db.connect();
 
-  // await seedUsers(client);
-  await seedRSOs(client);
+  const tablesToSeed = process.argv[2];
+  if (!tablesToSeed) {
+    await client.end();
+    throw "Usage: TABLE=<table to seed> npm run seed";
+  }
+
+  switch (tablesToSeed) {
+    case "users":
+      await seedUsers(client);
+      break;
+    case "rsos":
+      await seedRSOs(client);
+      break;
+    case "all":
+      await seedUsers(client);
+      await seedRSOs(client);
+      break;
+  }
 
   await client.end();
 }

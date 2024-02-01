@@ -37,7 +37,11 @@ yarn-error.log*
 next-env.d.ts
 
 # seed data
-scripts/*.json
+*.json
+
+# testing files
+test.js
+test.ts
 
 # development notes
 docs/
