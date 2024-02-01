@@ -11,9 +11,11 @@ export type RSOSql = {
   id: string;
   name: string;
   emails: string;
+  phones: string;
   logo: string;
   links: string;
   ratings: string;
+  num_reviews: number;
 };
 
 export type ReviewSql = {
