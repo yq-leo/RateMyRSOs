@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import Image from "next/image";
-import { RSO } from "@/app/lib/definitions";
+import { RSO } from "@/app/lib/types/util-types";
 
 import ReviewCard from "@/app/ui/rso/review-card";
 

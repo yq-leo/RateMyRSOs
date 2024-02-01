@@ -4,7 +4,7 @@ import { useState, FormEvent, ChangeEvent } from "react";
 import Link from "next/link";
 import styles from "./email-form.module.css";
 import { signIn } from "next-auth/react";
-import { SignInFormData, SignInFormError } from "@/app/lib/definitions";
+import { SignInFormData, SignInFormError } from "@/app/lib/types/util-types";
 import { useRouter } from "next/navigation";
 
 export default function EmailForm() {

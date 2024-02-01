@@ -1,7 +1,7 @@
 import styles from "./rso-card.module.css";
 import Image from "next/image";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
-import { RSO } from "@/app/lib/definitions";
+import { RSO } from "@/app/lib/types/util-types";
 
 export default function RSOCard({
   rso,

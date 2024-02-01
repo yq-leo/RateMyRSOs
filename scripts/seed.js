@@ -1,5 +1,5 @@
 const { db } = require("@vercel/postgres");
-const { users } = require("./data.json");
+const { users, rsos } = require("./data.json");
 const bcrypt = require("bcrypt");
 
 async function seedUsers(client) {
@@ -40,10 +40,49 @@ async function seedUsers(client) {
   }
 }
 
+async function seedRSOs(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS rsos (
+        id uuid DEFAULT uuid_generate_v4() UNIQUE PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        emails VARCHAR(255),
+        logo VARCHAR(255),
+        links VARCHAR(255),
+        ratings VARCHAR(255),
+        num_reviews INT DEFAULT 0
+      );
+    `;
+    console.log("RSOs table created");
+
+    const insertedRSOs = await Promise.all(
+      rsos.map(async (rso) => {
+        return client.sql`
+          INSERT INTO rsos (id, name, emails, logo, links, ratings)
+          VALUES (${rso.id}, ${rso.name}, ${rso.emails}, ${rso.logo}, ${rso.links}, ${rso.ratings})
+          ON CONFLICT (id) DO NOTHING
+        `;
+      })
+    );
+    console.log(`Seeded ${insertedRSOs.length} rsos`);
+
+    return {
+      createTable,
+      rsos: insertedRSOs,
+    };
+  } catch (error) {
+    console.error("Error seeding RSOs: ", error);
+    throw error;
+  }
+}
+
 async function main() {
   const client = await db.connect();
 
-  await seedUsers(client);
+  // await seedUsers(client);
+  await seedRSOs(client);
 
   await client.end();
 }

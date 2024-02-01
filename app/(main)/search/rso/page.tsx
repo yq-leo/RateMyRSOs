@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import RSOCard from "@/app/ui/rso-card";
-import { RSO } from "@/app/lib/definitions";
+import { RSO } from "@/app/lib/types/util-types";
 
 type SearchParams = {
   query?: string;

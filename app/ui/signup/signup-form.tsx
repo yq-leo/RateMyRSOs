@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "./signup-form.module.css";
-import { SignUpFormData, SignUpFormError } from "@/app/lib/definitions";
+import { SignUpFormData, SignUpFormError } from "@/app/lib/types/util-types";
 import { signUpUser } from "@/app/lib/actions";
 
 export default function SignUpForm() {
