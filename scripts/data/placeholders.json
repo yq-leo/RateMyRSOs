@@ -1,0 +1,43 @@
+{
+  "rsos": [
+    {
+      "id": "1",
+      "name": "ACM",
+      "image": "https://acm.illinois.edu/wp-content/uploads/2020/08/ACM-Logo-White-Text-1.png",
+      "rating": 4.5,
+      "numReviews": 0
+    },
+        {
+          "id": "2",
+          "name": "IEEE",
+          "image":
+            "https://ieee.illinois.edu/wp-content/uploads/2020/08/IEEE-Logo-White-Text-1.png",
+          "rating": 4.5,
+          "numReviews": 0
+        },
+        {
+          "id": "3",
+          "name": "HackIllinois",
+          "image":
+            "https://hackillinois.org/wp-content/uploads/2020/08/HackIllinois-Logo-White-Text-1.png",
+          "rating": 4.5,
+          "numReviews": 0
+        },
+        {
+          "id": "4",
+          "name": "CS+Social Good",
+          "image":
+            "https://csplus.socialgood.illinois.edu/wp-content/uploads/2020/08/CS-SG-Logo-White-Text-1.png",
+          "rating": 4.5,
+          "numReviews": 0
+        },
+        {
+          "id": "5",
+          "name": "Illini Solar Car",
+          "image":
+            "https://illini-solar-car.illinois.edu/wp-content/uploads/2020/08/Illini-Solar-Car-Logo-White-Text-1.png",
+          "rating": 4.5,
+          "numReviews": 0
+        }
+      ]
+}

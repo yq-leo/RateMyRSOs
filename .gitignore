@@ -38,6 +38,7 @@ next-env.d.ts
 
 # seed data
 *.json
+!placeholders.json
 
 # testing files
 test.js
