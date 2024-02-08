@@ -1,3 +1,4 @@
+// Database actions and form validation functions
 "use server";
 
 import { sql } from "@vercel/postgres";
